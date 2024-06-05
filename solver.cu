@@ -56,6 +56,14 @@ public:
 */
 void ComputeSequential(double* U_0, double* U_res, double lambda, int rows, int cols) {
     // #TODO
+    for (int i = 1; i < rows - 1; i++) {
+            for (int j = 1; j < cols - 1; j++) {
+                U_res[i * cols + j] = (1 - 4 * lambda) * U_0[i * cols + j] + lambda * (
+                    U_0[(i + 1) * cols + j] + U_0[i * cols + j + 1] +
+                    U_0[(i - 1) * cols + j] + U_0[i * cols + j - 1]
+                );
+            }
+        }
 }
 
 //----------------------------------------------------
@@ -68,6 +76,13 @@ void ComputeSequential(double* U_0, double* U_res, double lambda, int rows, int 
 */
 __global__ void ComputeGPUAux(double* U_0, double* U_res, double lambda) {
     // #TODO
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    int j = blockIdx.y * blockDim.y + threadIdx.y;
+
+    U_res[i * cols + j] = (1 - 4 * lambda) * U_0[i * cols + j] + lambda * (
+        U_0[(i + 1) * cols + j] + U_0[i * cols + j + 1] +
+        U_0[(i - 1) * cols + j] + U_0[i * cols + j - 1]
+    );
 }
 
 /**
@@ -80,6 +95,24 @@ __global__ void ComputeGPUAux(double* U_0, double* U_res, double lambda) {
 */
 void ComputeGPU(double* U_0, double* U_res, double lambda, int rows, int cols) {
     // #TODO
+    int size = rows * cols * sizeof(double);
+    double *d_U_0, *d_U_res;
+
+    cudaMalloc(&d_U_0, size);
+    cudaMalloc(&d_U_res, size);
+
+    cudaMemcpy(d_U_0, U_0, size, cudaMemcpyHostToDevice);
+
+    dim3 threadsPerBlock(16, 16);
+    dim3 numBlocks((rows + threadsPerBlock.x - 1) / threadsPerBlock.x, (cols + threadsPerBlock.y - 1) / threadsPerBlock.y);
+
+    ComputeGPUAux<<<numBlocks, threadsPerBlock>>>(d_U_0, d_U_res, lambda);
+    cudaDeviceSynchronize();
+
+    cudaMemcpy(U_res, d_U_res, size, cudaMemcpyDeviceToHost);
+
+    cudaFree(d_U_0);
+    cudaFree(d_U_res);
 }
 
 //----------------------------------------------------
