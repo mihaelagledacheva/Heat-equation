@@ -6,6 +6,7 @@
  * @param cols - number of columns in the heat function grid
  * @param iterations - number of iterations
 */
+
 void ComputeSequential1(double* U, double lambda, int rows, int cols, int iterations) {
     double* U_next = (double*) malloc(rows * cols * sizeof(double));
     for (int n = 0; n < iterations; ++n) {
@@ -32,6 +33,7 @@ void ComputeSequential1(double* U, double lambda, int rows, int cols, int iterat
  * @param lambda - the lambda parameter used in the heat equation
  * @param size - chunk size
 */
+
 __global__
 void ComputeGPUAux1(double* U, double* U_next, int rows, int cols, double lambda, int size) {
     int index = blockIdx.x * blockDim.x + threadIdx.x;
@@ -59,6 +61,7 @@ void ComputeGPUAux1(double* U, double* U_next, int rows, int cols, double lambda
  * @param cols - number of columns in the heat function grid
  * @param iterations - number of iterations
 */
+
 void ComputeGPU1(double* U, double lambda, int rows, int cols, int iterations) {
     const int BLOCKS_NUM = 48;
     const int THREADS_PER_BLOCK = 256;
