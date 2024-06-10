@@ -5,7 +5,6 @@
 #include <limits>
 #include <memory>
 #include <vector>
-#include <iostream>
 
 class Point {
 public:
@@ -16,7 +15,7 @@ public:
     Point(double x, double y, double U=0) : x(x), y(y), U(U) {}
 
     bool operator==(const Point& other) const {
-        return (abs(x - other.x) < 1e-3 && abs(y - other.y) < 1e-3);
+        return (abs(x - other.x) < 1e-10 && abs(y - other.y) < 1e-10);
     }
 };
 
@@ -153,9 +152,8 @@ void visualize(double *U_res, int rows, int cols, int iterations, const std::str
 bool validate(double *U_res_seq, double *U_res_cuda, int rows, int cols) {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            if (abs(U_res_seq[i * cols + j] - U_res_cuda[i * cols + j]) > 1e-3) {
-                std::cout << i << ", " << j << ": " << U_res_seq[i * cols + j] << " != " << U_res_cuda[i * cols + j] <<std::endl;
-                //return false;
+            if (abs(U_res_seq[i * cols + j] - U_res_cuda[i * cols + j]) > 1e-10) {
+                return false;
             }
         }
     }

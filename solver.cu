@@ -85,3 +85,108 @@ void ComputeGPU1(double* U, double lambda, int rows, int cols, int iterations) {
 }
 
 //----------------------------------------------------
+
+/**
+ * @brief Computes the solutions of the heat equation in parallel
+ * @param U - array representing the current state of the heat function
+ * @param U_next - array representing the next state of the heat function
+ * @param rows - number of rows in the heat function grid
+ * @param cols - number of columns in the heat function grid
+ * @param lambda - the lambda parameter used in the heat equation
+*/
+__global__ void ComputeGPUAux2(double* U, double* U_next, int rows, int cols, double lambda) {
+    int i = blockIdx.y * blockDim.y + threadIdx.y;
+    int j = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < rows && j < cols) {
+        double a = (i < rows - 1) ? U[(i + 1) * cols + j] : 0;
+        double b = (i > 0) ? U[(i - 1) * cols + j] : 0;
+        double c = (j < cols - 1) ? U[i * cols + (j + 1)] : 0;
+        double d = (j > 0) ? U[i * cols + (j - 1)] : 0;
+        U_next[i * cols + j] = (1 - 4 * lambda) * U[i * cols + j] + lambda * (a + b + c + d);
+    }
+}
+
+/**
+ * @brief Parallelizes the numerical scheme for GPU acceleration
+ * @param U - array representing the state of the heat function
+ * @param lambda - the lambda parameter used in the heat equation
+ * @param rows - number of rows in the heat function grid
+ * @param cols - number of columns in the heat function grid
+ * @param iterations - number of iterations
+*/
+void ComputeGPU2(double* U, double lambda, int rows, int cols, int iterations) {
+    dim3 threadsPerBlock(16, 16);
+    dim3 blocksPerGrid((cols + threadsPerBlock.x - 1) / threadsPerBlock.x, (rows + threadsPerBlock.y - 1) / threadsPerBlock.y);
+
+    double *d_U, *d_U_next;
+    
+    cudaMalloc(&d_U, rows * cols * sizeof(double));
+    cudaMalloc(&d_U_next, rows * cols * sizeof(double));
+    cudaMemcpy(d_U, U, rows * cols * sizeof(double), cudaMemcpyHostToDevice);
+
+    for (int n = 0; n < iterations; ++n) {
+        ComputeGPUAux2<<<blocksPerGrid, threadsPerBlock>>>(d_U, d_U_next, rows, cols, lambda);
+        cudaDeviceSynchronize();
+        std::swap(d_U, d_U_next);
+    }
+
+    cudaMemcpy(U, d_U, rows * cols * sizeof(double), cudaMemcpyDeviceToHost);
+
+    cudaFree(d_U);
+    cudaFree(d_U_next);
+}
+
+//----------------------------------------------------
+
+/**
+ * @brief Computes the solutions of the heat equation in parallel
+ * @param U - array representing the current state of the heat function
+ * @param U_next - array representing the next state of the heat function
+ * @param rows - number of rows in the heat function grid
+ * @param cols - number of columns in the heat function grid
+ * @param lambda - the lambda parameter used in the heat equation
+*/
+__global__ void ComputeGPUAux3(double* U, double* U_next, int rows, int cols, double lambda) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (i < rows) {
+        for (int j = 0; j < cols; ++j) {
+            double a = (i < rows - 1) ? U[(i + 1) * cols + j] : 0;
+            double b = (i > 0) ? U[(i - 1) * cols + j] : 0;
+            double c = (j < cols - 1) ? U[i * cols + (j + 1)] : 0;
+            double d = (j > 0) ? U[i * cols + (j - 1)] : 0;
+            U_next[i * cols + j] = (1 - 4 * lambda) * U[i * cols + j] + lambda * (a + b + c + d);
+        }
+    }
+}
+
+/**
+ * @brief Parallelizes the numerical scheme for GPU acceleration
+ * @param U - array representing the state of the heat function
+ * @param lambda - the lambda parameter used in the heat equation
+ * @param rows - number of rows in the heat function grid
+ * @param cols - number of columns in the heat function grid
+ * @param iterations - number of iterations
+*/
+void ComputeGPU3(double* U, double lambda, int rows, int cols, int iterations) {
+    double *d_U, *d_U_next;
+    size_t size = rows * cols * sizeof(double);
+
+    cudaMalloc(&d_U, size);
+    cudaMalloc(&d_U_next, size);
+    cudaMemcpy(d_U, U, size, cudaMemcpyHostToDevice);
+
+    dim3 threadsPerBlock(256);
+    dim3 blocksPerGrid((rows + threadsPerBlock.x - 1) / threadsPerBlock.x);
+
+    for (int n = 0; n < iterations; ++n) {
+        ComputeGPUAux3<<<blocksPerGrid, threadsPerBlock>>>(d_U, d_U_next, rows, cols, lambda);
+        cudaDeviceSynchronize();
+        std::swap(d_U, d_U_next);
+    }
+
+    cudaMemcpy(U, d_U, size, cudaMemcpyDeviceToHost);
+    cudaFree(d_U);
+    cudaFree(d_U_next);
+}
