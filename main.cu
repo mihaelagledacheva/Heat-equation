@@ -61,20 +61,20 @@ int main(int argc, char* argv[]) {
     std::function<void(double*, double, int, int, int)> gpu_solver;
     switch (solver) {
         case 1: {
-            //Equation 1, fixed number of threads
-            sequential_solver = ComputeSequential1;
+            // Equation 1, fixed number of threads
+            sequential_solver = ComputeSequential;
             gpu_solver = ComputeGPU1;
             break;
         }
         case 2: {
-            //Equation 1, one thread per grid element
-            sequential_solver = ComputeSequential1;
+            // Equation 1, one thread per grid element
+            sequential_solver = ComputeSequential;
             gpu_solver = ComputeGPU2;
             break;
         }
         case 3: {
-            //Equation 1, one thread per row
-            sequential_solver = ComputeSequential1;
+            // Equation 1, one thread per row
+            sequential_solver = ComputeSequential;
             gpu_solver = ComputeGPU3;
             break;
         }

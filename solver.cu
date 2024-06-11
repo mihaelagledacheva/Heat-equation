@@ -7,7 +7,7 @@
  * @param iterations - number of iterations
 */
 
-void ComputeSequential1(double* U, double lambda, int rows, int cols, int iterations) {
+void ComputeSequential(double* U, double lambda, int rows, int cols, int iterations) {
     double* U_next = (double*) malloc(rows * cols * sizeof(double));
     for (int n = 0; n < iterations; ++n) {
         for (int i = 0; i < rows; ++i) {
@@ -120,7 +120,7 @@ __global__ void ComputeGPUAux2(double* U, double* U_next, int rows, int cols, do
 */
 void ComputeGPU2(double* U, double lambda, int rows, int cols, int iterations) {
     dim3 threadsPerBlock(16, 16);
-    dim3 blocksPerGrid((cols + threadsPerBlock.x - 1) / threadsPerBlock.x, (rows + threadsPerBlock.y - 1) / threadsPerBlock.y);
+    dim3 blocksPerGrid((cols + threadsPerBlock.x + 1) / threadsPerBlock.x, (rows + threadsPerBlock.y + 1) / threadsPerBlock.y);
 
     double *d_U, *d_U_next;
     
@@ -173,15 +173,15 @@ __global__ void ComputeGPUAux3(double* U, double* U_next, int rows, int cols, do
  * @param iterations - number of iterations
 */
 void ComputeGPU3(double* U, double lambda, int rows, int cols, int iterations) {
+    const int threadsPerBlock = 256;
+    const int blocksPerGrid = (rows + threadsPerBlock + 1) / threadsPerBlock;
+
     double *d_U, *d_U_next;
     size_t size = rows * cols * sizeof(double);
 
     cudaMalloc(&d_U, size);
     cudaMalloc(&d_U_next, size);
     cudaMemcpy(d_U, U, size, cudaMemcpyHostToDevice);
-
-    dim3 threadsPerBlock(256);
-    dim3 blocksPerGrid((rows + threadsPerBlock.x - 1) / threadsPerBlock.x);
 
     for (int n = 0; n < iterations; ++n) {
         ComputeGPUAux3<<<blocksPerGrid, threadsPerBlock>>>(d_U, d_U_next, rows, cols, lambda);

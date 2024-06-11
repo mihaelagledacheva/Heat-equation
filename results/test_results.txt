@@ -1,0 +1,239 @@
+test 1
+Grid size: 23x23
+Sequential algorithm: 0 milliseconds
+GPU1 algorithm: 80 milliseconds
+GPU2 algorithm: 62 milliseconds
+GPU3 algorithm: 61 milliseconds
+Results stored in heatmap_1.png
+
+test 2
+Grid size: 411x411
+Sequential algorithm: 232 milliseconds
+GPU1 algorithm: 81 milliseconds
+GPU2 algorithm: 83 milliseconds
+GPU3 algorithm: 115 milliseconds
+Results stored in heatmap_2.png
+
+test 3
+Grid size: 1621x1621
+Sequential algorithm: 15278 milliseconds
+GPU1 algorithm: 2141 milliseconds
+GPU2 algorithm: 316 milliseconds
+GPU3 algorithm: 1044 milliseconds
+Results stored in heatmap_3.png
+
+test 4
+Grid size: 1041x1041
+Sequential algorithm: 3763 milliseconds
+GPU1 algorithm: 482 milliseconds
+GPU2 algorithm: 136 milliseconds
+GPU3 algorithm: 482 milliseconds
+Results stored in heatmap_4.png
+
+test 5
+Grid size: 1041x1041
+Sequential algorithm: 3746 milliseconds
+GPU1 algorithm: 491 milliseconds
+GPU2 algorithm: 130 milliseconds
+GPU3 algorithm: 501 milliseconds
+Results stored in heatmap_5.png
+
+test 6
+Grid size: 1041x1041
+Sequential algorithm: 3747 milliseconds
+GPU1 algorithm: 518 milliseconds
+GPU2 algorithm: 134 milliseconds
+GPU3 algorithm: 503 milliseconds
+Results stored in heatmap_6.png
+
+test 7
+Grid size: 1041x1041
+Sequential algorithm: 3785 milliseconds
+GPU1 algorithm: 486 milliseconds
+GPU2 algorithm: 158 milliseconds
+GPU3 algorithm: 482 milliseconds
+Results stored in heatmap_7.png
+
+test 8
+Grid size: 333x333
+Sequential algorithm: 116 milliseconds
+GPU1 algorithm: 61 milliseconds
+GPU2 algorithm: 47 milliseconds
+GPU3 algorithm: 79 milliseconds
+Results stored in heatmap_8.png
+
+test 9
+Grid size: 1061x1061
+Sequential algorithm: 4015 milliseconds
+GPU1 algorithm: 453 milliseconds
+GPU2 algorithm: 132 milliseconds
+GPU algorithm: 477 milliseconds
+Results stored in heatmap_9.png
+
+test 10
+Grid size: 1101x1101
+Sequential algorithm: 4203 milliseconds
+GPU1 algorithm: 503 milliseconds
+GPU2 algorithm: 139 milliseconds
+GPU3 algorithm: 532 milliseconds
+Results stored in heatmap_10.png
+
+test 11
+Grid size: 1201x1201
+Sequential algorithm: 5277 milliseconds
+GPU1 algorithm: 723 milliseconds
+GPU2 algorithm: 192 milliseconds
+GPU3 algorithm: 538 milliseconds
+Results stored in heatmap_11.png
+
+test 12
+Grid size: 351x351
+Sequential algorithm: 86 milliseconds
+GPU1 algorithm: 64 milliseconds
+GPU2 algorithm: 68 milliseconds
+GPU algorithm: 86 milliseconds
+Results stored in heatmap_12.png
+
+test 13
+Grid size: 551x551
+Sequential algorithm: 424 milliseconds
+GPU1 algorithm: 78 milliseconds
+GPU2 algorithm: 110 milliseconds
+GPU3 algorithm: 149 milliseconds
+Results stored in heatmap_13.png
+
+test 14
+Grid size: 751x751
+Sequential algorithm: 1180 milliseconds
+GPU1 algorithm: 167 milliseconds
+GPU2 algorithm: 123 milliseconds
+GPU algorithm: 245 milliseconds
+Results stored in heatmap_14.png
+
+test 15
+Grid size: 951x951
+Sequential algorithm: 2517 milliseconds
+GPU1 algorithm: 270 milliseconds
+GPU2 algorithm: 112 milliseconds
+GPU3 algorithm: 378 milliseconds
+Results stored in heatmap_15.png
+
+test 16
+Grid size: 1151x1151
+Sequential algorithm: 4678 milliseconds
+GPU1 algorithm: 646 milliseconds
+GPU2 algorithm: 148 milliseconds
+GPU3 algorithm: 517 milliseconds
+Results stored in heatmap_16.png
+
+test 17
+Grid size: 351x351
+Sequential algorithm: 86 milliseconds
+GPU1 algorithm: 61 milliseconds
+GPU2 algorithm: 71 milliseconds
+GPU3 algorithm: 85 milliseconds
+Results stored in heatmap_17.png
+
+test 18
+Grid size: 551x551
+Sequential algorithm: 424 milliseconds
+GPU1 algorithm: 76 milliseconds
+GPU2 algorithm: 67 milliseconds
+GPU3 algorithm: 144 milliseconds
+Results stored in heatmap_18.png
+
+test 19
+Grid size: 751x751
+Sequential algorithm: 1181 milliseconds
+GPU1 algorithm: 163 milliseconds
+GPU2 algorithm: 92 milliseconds
+GPU3 algorithm: 273 milliseconds
+Results stored in heatmap_19.png
+
+test 20
+Grid size: 951x951
+Sequential algorithm: 2526 milliseconds
+GPU1 algorithm: 266 milliseconds
+GPU2 algorithm: 113 milliseconds
+GPU3 algorithm: 367 milliseconds
+Results stored in heatmap_20.png
+
+test 21
+Grid size: 1151x1151
+Sequential algorithm: 4685 milliseconds
+GPU1 algorithm: 642 milliseconds
+GPU2 algorithm: 151 milliseconds
+GPU3 algorithm: 513 milliseconds
+Results stored in heatmap_21.png
+
+test 22
+Grid size: 541x541
+Sequential algorithm: 592 milliseconds
+GPU1 algorithm: 82 milliseconds
+GPU2 algorithm: 60 milliseconds
+GPU3 algorithm: 191 milliseconds
+Results stored in heatmap_22.png
+
+test 23
+Grid size: 1541x1541
+Sequential algorithm: 14016 milliseconds
+GPU1 algorithm: 1447 milliseconds
+GPU2 algorithm: 293 milliseconds
+GPU algorithm: 965 milliseconds
+Results stored in heatmap_23.png
+
+test 24
+Grid size: 2541x2541
+Sequential algorithm: 60465 milliseconds
+GPU1 algorithm: 9170 milliseconds
+GPU2 algorithm: 955 milliseconds
+GPU3 algorithm: 2350 milliseconds
+Results stored in heatmap_24.png
+
+test 25
+Grid size: 526x526
+Sequential algorithm: 483 milliseconds
+GPU1 algorithm: 77 milliseconds
+GPU2 algorithm: 74 milliseconds
+GPU3 algorithm: 153 milliseconds
+Results stored in heatmap_25.png
+
+test 26
+Grid size: 1026x1026
+Sequential algorithm: 3671 milliseconds
+GPU1 algorithm: 290 milliseconds
+GPU2 algorithm: 128 milliseconds
+GPU3 algorithm: 455 milliseconds
+Results stored in heatmap_26.png
+
+test 27
+Grid size: 1526x1526
+Sequential algorithm: 12295 milliseconds
+GPU1 algorithm: 923 milliseconds
+GPU2 algorithm: 291 milliseconds
+GPU3 algorithm: 909 milliseconds
+Results stored in heatmap_27.png
+
+test 28
+Grid size: 1051x1051
+Sequential algorithm: 3858 milliseconds
+GPU1 algorithm: 504 milliseconds
+GPU2 algorithm: 161 milliseconds
+GPU3 algorithm: 483 milliseconds
+Results stored in heatmap_28.png
+
+test 29
+Grid size: 1551x1551
+Sequential algorithm: 12718 milliseconds
+GPU1 algorithm: 1780 milliseconds
+GPU2 algorithm: 285 milliseconds
+GPU algorithm: 959 milliseconds
+Results stored in heatmap_29.png
+
+test 30
+Grid size: 2051x2051
+Sequential algorithm: 29661 milliseconds
+GPU1 algorithm: 2458 milliseconds
+GPU2 algorithm: 556 milliseconds
+GPU algorithm: 1589 milliseconds
+Results stored in heatmap_30.png
